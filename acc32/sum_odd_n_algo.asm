@@ -17,23 +17,33 @@
 .text
 
 _start:
+    ; load into ACC value by address from ACC (acc <- mem[acc])
     load         input_addr
-    load_acc                                 ; load into ACC value by address from ACC (acc <- mem[acc])
+    load_acc
     store        n
 
+    ; check is n > 0
+    ; if n <= 0 --> stop program
     load         n
     bgt          init
 
+
+; bad N input handler
+; return -1 if bad input happened
 bad_input:
     load         minus_one
     jmp          _finish
 
+
+; check is n % 2 == 0 and select useful algo for odd numbers count
 init:
     load         n
     rem          two
     bgt          init_odd_N
     jmp          init_even_N
 
+
+; counter for odd numbers in case N is odd
 init_odd_N:
     load         n
     add          one
@@ -42,12 +52,16 @@ init_odd_N:
     jmp          solution
 
 
+; counter for odd numbers in case N is even
 init_even_N:
     load         n
     div          two
     store        k
     jmp          solution
 
+
+; result counter
+; use formula [sum_odd = k_odd ** 2]
 solution:
     load         k
     mul          k
@@ -56,9 +70,13 @@ solution:
 
     jmp _finish
 
+
+; overflow situation handler
 overflow:
     load overflow_val
 
+
+; finish method
 _finish:
     store_ind output_addr
     halt
