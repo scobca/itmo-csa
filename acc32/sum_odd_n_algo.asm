@@ -5,8 +5,8 @@
     output_addr:  .word 0x84     ; output address
 
     ; program variables
-    n:            .word 0        ; n
-    k:            .word 0
+    n:            .word 0        ; n — input number
+    k:            .word 0        ; k — count of odd numbers in [1..n]
 
     ; consts
     one:          .word 1
