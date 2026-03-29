@@ -7,11 +7,8 @@
     ; program variables
     n:            .word 0        ; n
     k:            .word 0
-    result:       .word 0        ; result
-    counter:      .word 0
 
     ; consts
-    zero:         .word 0
     one:          .word 1
     two:          .word 2
     minus_one:    .word -1
@@ -29,13 +26,9 @@ _start:
 
 bad_input:
     load         minus_one
-    store_ind    output_addr
-    halt
+    jmp          _finish
 
 init:
-    load         zero
-    store        result
-
     load         n
     rem          two
     bgt          init_odd_N
@@ -46,32 +39,28 @@ init_odd_N:
     add          one
     div          two
     store        k
-    jmp          loop
+    jmp          solution
 
 
 init_even_N:
     load         n
     div          two
     store        k
-    jmp          loop
+    jmp          solution
 
-loop:
+solution:
     load         k
     mul          k
 
-    bvs         overflow
-    store       result
+    bvs          overflow
 
-    jmp         _finish
+    jmp _finish
 
 overflow:
-    load        overflow_val
-    store_ind   output_addr
-    halt
+    load overflow_val
 
 _finish:
-    load        result
-    store_ind   output_addr
+    store_ind output_addr
     halt
 
 
