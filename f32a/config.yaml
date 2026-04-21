@@ -1,0 +1,24 @@
+# Execution limits
+limit: 1000             # Maximum instructions to execute
+memory_size: 0x1000       # Memory size in bytes
+
+# I/O configuration
+memory_mapped_io:
+  0x80: [ 123 ]           # Input values at address 0x80
+  0x84: [ ]             # Output-only port at address 0x84
+
+# Reports configuration
+reports:
+  - name: Step-by-step
+    slice: all
+    view: |
+      {pc}: {instruction} {pc:label}
+
+  - name: Result
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80}
+      numio[0x84]: {io:0x84}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> []
