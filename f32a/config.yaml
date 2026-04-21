@@ -14,6 +14,22 @@ reports:
     view: |
       {pc}: {instruction} {pc:label}
 
+  - name: Debug
+    slice: all
+    view: |
+      ————————————————————————————————— 
+      {pc}: instruction: {instruction} 
+      label: {pc:label} 
+      A: {A:dec} (dec), {A:hex} (hex)
+      B: {B:dec} (dec), {B:hex} (hex)
+      ======= Stack =======
+      (dec): {stack:dec}
+      (hex): {stack:hex}
+      ==== Return Stack ====
+      (hex): {rstack:dec}
+      (dec): {rstack:hex}
+      ————————————————————————————————— 
+
   - name: Result
     slice: last
     view: |
