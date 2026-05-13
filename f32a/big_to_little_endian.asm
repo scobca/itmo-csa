@@ -14,18 +14,18 @@
 .text
 .org 0x90
 
-    shift_right_8:                  \; implementation of n >> 8
+    shift_right_8:                  \; set count of unshifted bits into R stack
         @p move_bits >r
 
-    shift_right_loop:
+    shift_right_loop:               \; shift >> 1, if (R.top != 0): shift_right_loop else: return
         2/
         next shift_right_loop
         ;
 
-    shift_left_8:                   \; implementation of n << 8
+    shift_left_8:                   \; set count of unshifted bits into R stack
         @p move_bits >r
 
-    shift_left_loop:
+    shift_left_loop:                \; shift << 1, if (R.top != 0): shift_right_loop else: return
         2*
         next shift_left_loop
         ;
