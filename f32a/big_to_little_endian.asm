@@ -8,16 +8,27 @@
     \; programm consts
     mask:           .word   0xFF    \; mask for byte highlighting
     move_bytes:     .word   4       \; number of bytes not shifted
+    move_bits:      .word   7       \; numver of bits shall be shifted
     current_byte:   .word   0       \; value of working byte
 
 .text
 .org 0x90
 
     shift_right_8:                  \; implementation of n >> 8
-        2/ 2/ 2/ 2/ 2/ 2/ 2/ 2/ ;
+        @p move_bits >r
+
+    shift_right_loop:
+        2/
+        next shift_right_loop
+        ;
 
     shift_left_8:                   \; implementation of n << 8
-        2* 2* 2* 2* 2* 2* 2* 2* ;
+        @p move_bits >r
+
+    shift_left_loop:
+        2*
+        next shift_left_loop
+        ;
 
     decrement_move_bytes:
         @p move_bytes               \; stack <- mem[move_bytes]
