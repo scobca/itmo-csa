@@ -1,0 +1,55 @@
+# Execution limits
+limit: 2000              # Maximum instructions to execute
+memory_size: 0x500       # Memory size in bytes
+
+# I/O configuration
+memory_mapped_io:
+  0x80: [ "2 3 +" ]     # Input values at address 0x80
+  0x84: [ ]             # Output-only port at address 0x84
+
+# Reports configuration
+reports:
+  - name: Step-by-step
+    slice: all
+    view: |
+      {pc}: {instruction} {pc:label}
+
+  - name: Debug
+    slice: all
+    view: |
+      ————————————————————————————————— 
+      {pc}: instruction: {instruction}
+      label: {pc:label}
+      
+      ======= Data Registers =======
+      (dec)={D0:dec} | (hex)={D0:hex}
+      (dec)={D1:dec} | (hex)={D1:hex}
+      (dec)={D2:dec} | (hex)={D2:hex}
+      (dec)={D3:dec} | (hex)={D3:hex}
+      (dec)={D4:dec} | (hex)={D4:hex}
+      (dec)={D5:dec} | (hex)={D5:hex}
+      (dec)={D6:dec} | (hex)={D6:hex}
+      (dec)={D7:dec} | (hex)={D7:hex}
+      
+      ==== Address Registers ====
+      (dec)={A0:dec} | (hex)={A0:hex}
+      (dec)={A1:dec} | (hex)={A1:hex}
+      (dec)={A2:dec} | (hex)={A2:hex}
+      (dec)={A3:dec} | (hex)={A3:hex}
+      (dec)={A4:dec} | (hex)={A4:hex}
+      (dec)={A5:dec} | (hex)={A5:hex}
+      (dec)={A6:dec} | (hex)={A6:hex}
+      (dec)={A7:dec} | (hex)={A7:hex}
+      
+      ==== Status Registers ====
+      {SR:bin} (flags: N, Z, V, C)
+      ————————————————————————————————— 
+
+  - name: Result
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:hex}
+      numio[0x84]: {io:0x84:hex}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> []
