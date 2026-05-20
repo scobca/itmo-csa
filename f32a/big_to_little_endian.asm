@@ -1,5 +1,4 @@
 .data
-.org 0x00
 
     \; I/O consts
     input_addr:     .word   0x80    \; input address
@@ -7,9 +6,9 @@
 
     \; programm consts
     mask:           .word   0xFF    \; mask for byte highlighting
-    move_bytes:     .word   4       \; number of bytes not shifted
-    move_bits:      .word   7       \; numver of bits shall be shifted
-    current_byte:   .word   0       \; value of working byte
+    move_bytes:     .word   0x04       \; number of bytes not shifted
+    move_bits:      .word   0x07       \; numver of bits shall be shifted
+    current_byte:   .word   0x00       \; value of working byte
 
 .text
 .org 0x90
