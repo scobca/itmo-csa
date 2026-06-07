@@ -4,7 +4,7 @@
 ; D1 - digits stacker
 ; D2 - operand 1
 ; D3 - operand 2
-; D4 - temp ASCII code storage
+; D4 - not used
 ; D5 - not used
 ; D6 - not used
 ; D7 - discharge multiplier
@@ -12,12 +12,12 @@
 ; Address registers
 ; A0 - input address
 ; A1 - output address
-; A2 - temp storage
+; A2 - not used
 ; A3 - not used
 ; A4 - not used
-; A5 - pointer for custom dataBuffer
-; A6 - not used
-; A7 - standart stack pointer
+; A5 - dataBuffer
+; A6 - ASCII symbols buffer
+; A7 - ASCII symbols buffer SP
 ; ======================================
 
 .data
