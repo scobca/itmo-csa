@@ -1,11 +1,11 @@
 # Execution limits
-limit: 2000              # Maximum instructions to execute
-memory_size: 0x1000       # Memory size in bytes
+limit: 2000                               # Maximum instructions to execute
+memory_size: 0x1000                       # Memory size in bytes
 
 # I/O configuration
 memory_mapped_io:
-  0x80: [ "9 3 +\n" ]     # Input values at address 0x80
-  0x84: [ ]             # Output-only port at address 0x84
+  0x80: [ "23 32 + 12 * 64 / 5 -\n" ]     # Input values at address 0x80
+  0x84: [ ]                               # Output-only port at address 0x84
 
 # Reports configuration
 reports:
@@ -22,14 +22,14 @@ reports:
       label: {pc:label}
       
       ======= Data Registers =======
-      (dec)={D0:dec} | (hex)={D0:hex}
-      (dec)={D1:dec} | (hex)={D1:hex}
-      (dec)={D2:dec} | (hex)={D2:hex}
-      (dec)={D3:dec} | (hex)={D3:hex}
-      (dec)={D4:dec} | (hex)={D4:hex}
-      (dec)={D5:dec} | (hex)={D5:hex}
-      (dec)={D6:dec} | (hex)={D6:hex}
-      (dec)={D7:dec} | (hex)={D7:hex}
+      (dec)={D0:dec} | (hex)={D0:dec}
+      (dec)={D1:dec} | (hex)={D1:dec}
+      (dec)={D2:dec} | (hex)={D2:dec}
+      (dec)={D3:dec} | (hex)={D3:dec}
+      (dec)={D4:dec} | (hex)={D4:dec}
+      (dec)={D5:dec} | (hex)={D5:dec}
+      (dec)={D6:dec} | (hex)={D6:dec}
+      (dec)={D7:dec} | (hex)={D7:dec}
       
       ==== Address Registers ====
       (dec)={A0:dec} | (hex)={A0:hex}
@@ -48,8 +48,8 @@ reports:
   - name: Result
     slice: last
     view: |
-      numio[0x80]: {io:0x80:hex}
-      numio[0x84]: {io:0x84:hex}
+      numio[0x80]: {io:0x80:dec}
+      numio[0x84]: {io:0x84:dec}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> []
+      numio[0x84]: [] >>> [5]
