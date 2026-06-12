@@ -4,7 +4,7 @@ memory_size: 0x1000                       # Memory size in bytes
 
 # I/O configuration
 memory_mapped_io:
-  0x80: [ "1 1 +\n" ]     # Input values at address 0x80
+  0x80: [ "1 1 +\n" ]                     # Input values at address 0x80
   0x84: [ ]                               # Output-only port at address 0x84
 
 # Reports configuration
@@ -22,24 +22,24 @@ reports:
       label: {pc:label}
       
       ======= Data Registers =======
-      (dec)={D0:dec} | (hex)={D0:dec}
-      (dec)={D1:dec} | (hex)={D1:dec}
-      (dec)={D2:dec} | (hex)={D2:dec}
-      (dec)={D3:dec} | (hex)={D3:dec}
-      (dec)={D4:dec} | (hex)={D4:dec}
-      (dec)={D5:dec} | (hex)={D5:dec}
-      (dec)={D6:dec} | (hex)={D6:dec}
-      (dec)={D7:dec} | (hex)={D7:dec}
+      D0: (dec)={D0:dec} | (hex)={D0:hex}
+      D1: (dec)={D1:dec} | (hex)={D1:hex}
+      D2: (dec)={D2:dec} | (hex)={D2:hex}
+      D3: (dec)={D3:dec} | (hex)={D3:hex}
+      D4: (dec)={D4:dec} | (hex)={D4:hex}
+      D5: (dec)={D5:dec} | (hex)={D5:hex}
+      D6: (dec)={D6:dec} | (hex)={D6:hex}
+      D7: (dec)={D7:dec} | (hex)={D7:hex}
       
       ==== Address Registers ====
-      (dec)={A0:dec} | (hex)={A0:hex}
-      (dec)={A1:dec} | (hex)={A1:hex}
-      (dec)={A2:dec} | (hex)={A2:hex}
-      (dec)={A3:dec} | (hex)={A3:hex}
-      (dec)={A4:dec} | (hex)={A4:hex}
-      (dec)={A5:dec} | (hex)={A5:hex}
-      (dec)={A6:dec} | (hex)={A6:hex}
-      (dec)={A7:dec} | (hex)={A7:hex}
+      A0: (dec)={A0:dec} | (hex)={A0:hex}
+      A1: (dec)={A1:dec} | (hex)={A1:hex}
+      A2: (dec)={A2:dec} | (hex)={A2:hex}
+      A3: (dec)={A3:dec} | (hex)={A3:hex}
+      A4: (dec)={A4:dec} | (hex)={A4:hex}
+      A5: (dec)={A5:dec} | (hex)={A5:hex}
+      A6: (dec)={A6:dec} | (hex)={A6:hex}
+      A7: (dec)={A7:dec} | (hex)={A7:hex}
       
       ==== Status Registers ====
       {SR:bin} (flags: N, Z, V, C)
@@ -52,4 +52,4 @@ reports:
       numio[0x84]: {io:0x84:dec}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> [-21]
+      numio[0x84]: [] >>> [2]
