@@ -7,7 +7,7 @@
 ; D4 - stack size counter
 ; D5 - <isLastNumber> flag
 ; D6 - <isLastSymbol> flag
-; D7 - error codes container
+; D7 - not used
 ; ======================================
 ; Address registers
 ; A0 - input address
@@ -29,8 +29,8 @@
     ascii_num_base:  .word   0x30            ; 0x30 (hex), - base of nubers in ASCII equals to 0
 
     ; buffers
-    numbers_buffer_addr:     .word   0x300   ; 0x300 - stack pointer address for dataBuffer
-    common_buffer_addr:      .word   0x400   ; 0x500 - stack pointer address for A7 SP
+    numbers_buffer_addr:     .word   0x300   ; 0x300 - stack pointer address for numbersBuffer
+    common_buffer_addr:      .word   0x400   ; 0x500 - stack pointer address for commonbuffer
     sp_buffer_addr:          .word   0x500   ; 0x500 - stack pointer address for A7 SP
 
     ; errors consts
@@ -227,7 +227,7 @@
 
     error:
         movea.l  error_val, A2        ; A2 <- address of sp_addr
-        move.l   (A2), (A1)           ; D7 <- error code
+        move.l   (A2), (A1)           ; mem[0x84] <- error code
 
         cmp.l    0, D6                ; check <isLastSymbol> flag
         beq      clear_input
@@ -236,9 +236,6 @@
 
     overflow:
         movea.l  overflow_val, A2     ; A2 <- address of sp_addr
-        move.l   (A2), (A1)           ; save error code into output
-
-        ;cmp.l    0, D6                ; check <isLastSymbol> flag
-        ;beq      clear_input
+        move.l   (A2), (A1)           ; mem[0x84] <- error code
 
         jmp _finish
