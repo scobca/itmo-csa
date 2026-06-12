@@ -4,7 +4,7 @@ memory_size: 0x1000                       # Memory size in bytes
 
 # I/O configuration
 memory_mapped_io:
-  0x80: [ "23 32 + 12 * 64 / 5 -\n" ]     # Input values at address 0x80
+  0x80: [ "1 1 +\n" ]     # Input values at address 0x80
   0x84: [ ]                               # Output-only port at address 0x84
 
 # Reports configuration
@@ -52,4 +52,4 @@ reports:
       numio[0x84]: {io:0x84:dec}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> [5]
+      numio[0x84]: [] >>> [-21]
