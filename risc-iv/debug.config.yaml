@@ -1,0 +1,66 @@
+# Execution limits
+limit: 2000                               # Maximum instructions to execute
+memory_size: 0x1000                       # Memory size in bytes
+
+# I/O configuration
+memory_mapped_io:
+  0x80: [ "Hello, world!\n" ]              # Input values at address 0x80
+  0x84: [ ]                               # Output-only port at address 0x84
+
+# Reports configuration
+reports:
+  - name: Step-by-step
+    slice: all
+    view: |
+      {pc}: {instruction} {pc:label}
+
+  - name: Debug
+    slice: all
+    view: |
+      ————————————————————————————————— 
+      {pc}: instruction: {instruction}
+      label: {pc:label}
+      
+      ======= Registers =======
+      Ra: (dec)={Ra:dec} | (hex)={Ra:hex}
+      Sp: (dec)={Sp:dec} | (hex)={Sp:hex}
+      Gp: (dec)={Gp:dec} | (hex)={Gp:hex}
+      S0Fp: (dec)={S0Fp:dec} | (hex)={S0Fp:hex}
+      A0: (dec)={A0:dec} | (hex)={A0:hex}
+      A1: (dec)={A1:dec} | (hex)={A1:hex}
+      A2: (dec)={A2:dec} | (hex)={A2:hex}
+      A3: (dec)={A3:dec} | (hex)={A3:hex}
+      A4: (dec)={A4:dec} | (hex)={A4:hex}
+      A5: (dec)={A5:dec} | (hex)={A5:hex}
+      A6: (dec)={A6:dec} | (hex)={A6:hex}
+      A7: (dec)={A7:dec} | (hex)={A7:hex}
+      S1: (dec)={S1:dec} | (hex)={S1:hex}
+      S2: (dec)={S2:dec} | (hex)={S2:hex}
+      S3: (dec)={S3:dec} | (hex)={S3:hex}
+      S4: (dec)={S4:dec} | (hex)={S4:hex}
+      S5: (dec)={S5:dec} | (hex)={S5:hex}
+      S6: (dec)={S6:dec} | (hex)={S6:hex}
+      S7: (dec)={S7:dec} | (hex)={S7:hex}
+      S8: (dec)={S8:dec} | (hex)={S8:hex}
+      S9: (dec)={S9:dec} | (hex)={S9:hex}
+      S10: (dec)={S10:dec} | (hex)={S10:hex}
+      S11: (dec)={S11:dec} | (hex)={S11:hex}
+      Tp: (dec)={Tp:dec} | (hex)={Tp:hex}
+      T0: (dec)={T0:dec} | (hex)={T0:hex}
+      T1: (dec)={T1:dec} | (hex)={T1:hex}
+      T2: (dec)={T2:dec} | (hex)={T2:hex}
+      T3: (dec)={T3:dec} | (hex)={T3:hex}
+      T4: (dec)={T4:dec} | (hex)={T4:hex}
+      T5: (dec)={T5:dec} | (hex)={T5:hex}
+      T6: (dec)={T6:dec} | (hex)={T6:hex}
+      
+      ————————————————————————————————— 
+
+  - name: Result
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:hex}
+      numio[0x84]: {io:0x84:hex}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> ["HELLO, WORLD!"]
