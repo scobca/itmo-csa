@@ -8,6 +8,7 @@ Simple scripts implementations for different CPU architectures
    - ```f32a``` - [big_to_little_endian](f32a/big_to_little_endian.asm)
    - ```m68k``` - [stack_based_calculator](m68k/stack_based_calculator.asm)
    - ```risc-iv``` - [upper_case_cstr](risc-iv/upper_case_cstr.asm)
+   - ```scheme``` - [Accumulator architecture](schema/acc32_scheme.drawio.png)
 
 ### Tooling
 - [wrench](https://github.com/ryukzak/wrench) - educational tool that includes simple CPU models and assemblers for them
